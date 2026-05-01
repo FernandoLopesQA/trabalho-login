@@ -17,7 +17,7 @@ export function efetuarLogin(email, senha) {
         if (usuarios[i].email == email) {
 
             if (usuarios[i].expirado == true) {
-                return 'Credenciais expiradas. Contate o administrador do sistema.';
+                return 'Credencial expirada. Contate o administrador do sistema.';
                 break;
             };
 
@@ -31,6 +31,6 @@ export function efetuarLogin(email, senha) {
         };
     };
 
-    return 'Credencial de e-mail informado não encontrada.';
+    return 'Credencial de e-mail informada não encontrada.';
 
 };

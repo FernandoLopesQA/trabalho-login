@@ -1,40 +1,40 @@
 import { efetuarLogin } from '../src/login.js';
 import assert from 'node:assert';
 
-describe('Testes fluxo de login', () => {
+describe('Testes no fluxo de login de usuário', () => {
 
-    it('Login com Sucesso', () => {
+    it('Deve retornar: "Login realizado com sucesso", quando informadas credenciais válidas para login', () => {
 
-        //Arrange e Act
+        // Act
         const validarLogin = efetuarLogin('ghostofsparta@monteolimpo.com', 'IAmTheGodOfWar');
 
-        //Assert
+        // Assert
         assert.equal(validarLogin, 'Login realizado com sucesso!');
     });
 
-    it('Credencial expirada', () => {
+    it('Deve retornar: "Credencial expirada...", quando usuário estiver setado como expirado = true na base', () => {
 
-        //Arrange e Act
+        // Act
         const validarLogin = efetuarLogin('estacanocoracao@transilvania.com', 'Aluc@rD');
 
-        //Assert
-        assert.equal(validarLogin, 'Credenciais expiradas. Contate o administrador do sistema.');
+        // Assert
+        assert.equal(validarLogin, 'Credencial expirada. Contate o administrador do sistema.');
 
     });
 
-    it('Usuario não encontrado', () => {
+    it('Deve retornar: "Credencial de e-mail informada não encontrada", quando e-mail de usuário informado não encontrado na base', () => {
 
-        //Arrange e Act
+        // Act
         const validarLogin = efetuarLogin('johnkramer@jigsaw.com', 'iwanttoplayagame');
 
-        //Assert
-        assert.equal(validarLogin, 'Credencial de e-mail informado não encontrada.');
+        // Assert
+        assert.equal(validarLogin, 'Credencial de e-mail informada não encontrada.');
 
     });
 
-    it('Senha incorreta para o usuário encontrado.', () => {
+    it('Deve retornar: "Credencial informada está incorreta", para usuário encontrado na base mas com a senha informada incorreta.', () => {
 
-        //Arrange e Act
+        // Act
         const validarLogin = efetuarLogin('peregrinopinzento@terramedia.com', 'YouShallNotPass!');
 
         //Assert
@@ -42,7 +42,7 @@ describe('Testes fluxo de login', () => {
 
     });
 
-    it('e-mail não informado', () => {
+    it('Deve retornar: "Informe e-mail e senha do usuário para efetuar o login no site", quando o e-mail não for informado', () => {
 
         // Act & Assert
         assert.throws(
@@ -54,7 +54,7 @@ describe('Testes fluxo de login', () => {
 
     });
 
-    it('senha não informada', () => {
+    it('Deve retornar: "Informe e-mail e senha do usuário para efetuar o login no site", quando a senha não for informada', () => {
 
         // Act & Assert
         assert.throws(

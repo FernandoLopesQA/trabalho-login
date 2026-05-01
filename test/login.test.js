@@ -27,7 +27,6 @@ describe('Testes no fluxo de login de usuário', () => {
 
         // Assert
         assert.equal(validarLogin, 'Credencial expirada. Contate o administrador do sistema.');
-
     });
 
     it('Deve retornar: "Credencial de e-mail informada não encontrada", quando e-mail de usuário informado não encontrado na base', () => {
@@ -41,7 +40,6 @@ describe('Testes no fluxo de login de usuário', () => {
 
         // Assert
         assert.equal(validarLogin, 'Credencial de e-mail informada não encontrada.');
-
     });
 
     it('Deve retornar: "Credencial informada está incorreta", para usuário encontrado na base mas com a senha informada incorreta.', () => {
@@ -55,7 +53,6 @@ describe('Testes no fluxo de login de usuário', () => {
 
         //Assert
         assert.equal(validarLogin, 'Credencial informada está incorreta. Verifique a senha informada.');
-
     });
 
     it('Deve retornar: "Informe e-mail e senha do usuário para efetuar o login no site", quando o e-mail não for informado', () => {
@@ -71,7 +68,6 @@ describe('Testes no fluxo de login de usuário', () => {
                 message: 'Informe e-mail e senha do usuário para efetuar o login no site.'
             }
         );
-
     });
 
     it('Deve retornar: "Informe e-mail e senha do usuário para efetuar o login no site", quando a senha não for informada', () => {
@@ -82,12 +78,10 @@ describe('Testes no fluxo de login de usuário', () => {
 
         // Act & Assert
         assert.throws(
-            function () { efetuarLogin('IKnowWhatYouDid@LastSummer.com', '') },
+            function () { efetuarLogin(email, senha) },
             {
                 message: 'Informe e-mail e senha do usuário para efetuar o login no site.'
             }
         );
-
     });
-
 });

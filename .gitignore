@@ -3,3 +3,6 @@ node_modules/
 
 # Arquivo criado automaticamente pelo macOS para guardar configurações da pasta, não é necessário subir para o GIT
 .DS_Store
+
+# Arquivos gerados pela execução do mochawesome report
+mochawesome-report/

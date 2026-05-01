@@ -9,7 +9,7 @@ const usuarios = [
 export function efetuarLogin(email, senha) {
 
     if (email == '' || senha == '') {
-        return 'Informe e-mail e senha do usuário para efetuar o login no site';
+        throw new Error('Informe e-mail e senha do usuário para efetuar o login no site.');
     };
 
     for (let i = 0; i < usuarios.length; i++) {
@@ -22,7 +22,7 @@ export function efetuarLogin(email, senha) {
             };
 
             if (usuarios[i].senha !== senha) {
-                return 'Credencial informada está incorreta. Revise e-mail e senha informados.';
+                return 'Credencial informada está incorreta. Verifique a senha informada.';
                 break;
             };
 
@@ -31,6 +31,6 @@ export function efetuarLogin(email, senha) {
         };
     };
 
-    return 'Credencial de e-mail informado não encontrado';
+    return 'Credencial de e-mail informado não encontrada.';
 
 };

@@ -1,15 +1,23 @@
-Trabalho da pós - Cadeira Programação para Automação de Testes
+# Trabalho da pós - Função de Login com testes unitários
+Projeto desenvolvido para a cadeira de Programação para Automação de Testes.
+
+O objetivo do projeto é implementar uma função de login que valida e-mail, senha e status da credencial de um usuário a partir de uma lista de usuários cadastrados.
+
+## Descrição do trabalho solicitado
 
 Desafio Valendo 2 Pontos na Nota Final
 
+* Foram corrigidos alguns pontos de texto do enunciado original para melhorar a leitura.
+* * Pontos ajustados: boleano -> booleano, usuarios -> usuários, função de para -> função para
+
 Pré-requisitos:
-Declare um vetor contendo informações sobre usuários de um site, contendo as propriedades: id, nome, email, senha e expirado (boleano, pode ser true ou false). Adicione ao menos um dos usuarios como expirado sendo true.
+Declare um vetor contendo informações sobre usuários de um site, contendo as propriedades: id, nome, email, senha e expirado (booleano, pode ser true ou false). Adicione ao menos um dos usuários como expirado sendo true.
 
 Desafio:
-Construa uma função de para realizar login. Quem usar a função deverá receber uma mensagem dizendo que o login foi realizado com sucesso caso exista um usuário com email e senha iguais aos informados. A função deve dizer que as credenciais expiraram caso expirado for true. A função também tem que dizer que as credenciais estão incorretas caso o email não exista ou a senha esteja incorreta para aquele email.
+Construa uma função para realizar login. Quem usar a função deverá receber uma mensagem dizendo que o login foi realizado com sucesso caso exista um usuário com email e senha iguais aos informados. A função deve dizer que as credenciais expiraram caso expirado for true. A função também tem que dizer que as credenciais estão incorretas caso o email não exista ou a senha esteja incorreta para aquele email.
 
 Testes:
-Escreva 4 testes: 1) Sucesso, 2) Credencial expirada, 3) Usuario não encontrado e 4) Senha incorreta para o usuário encontrado.
+Escreva 4 testes: 1) Sucesso, 2) Credencial expirada, 3) Usuário não encontrado e 4) Senha incorreta para o usuário encontrado.
 
 Exemplo:
 fazerLogin('email@existente.com', 'senhaCerta123'); -> 'Login realizado com sucesso'
@@ -18,7 +26,7 @@ fazerLogin('credencial@expirada.com', 'senhaCerta123'); -> Renove suas credencia
 Entrega:
 Suba seu código no Github e entregue o link via plataforma do PGATS até o dia 10 de maio às 23:59:59.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Pensamento computacional
 
 Decomposição:
 - Criar uma lista que armazena usuários com dados de identificação
@@ -58,3 +66,62 @@ Algoritmo:
   4 - Se e-mail informado estiver na lista, verificar campo expirado. Sendo true, retornar mensagem de credenciais expiradas
   5 - Se e-mail informado estiver na lista e expirado igual a false, verifica se a senha recebida é igual a senha do usuário na lista. Se não for, deve retornar mensagem que a senha está incorreta para aquele e-mail
   6 - Se e-mail estiver cadastrado, não expirado e a senha estiver correta, retornar mensagem de login realizado com sucesso
+
+
+## Tecnologias utilizadas
+
+- JavaScript
+- Node.js
+- Mocha
+- Mochawesome
+
+## Versões utilizadas
+
+- Mocha: 11.7.5
+- Mochawesome: 7.1.4
+
+As dependências de teste estão configuradas como `devDependencies`, pois são utilizadas apenas durante o desenvolvimento e execução dos testes.
+
+## Estrutura do projeto
+
+src/
+  login.js
+test/
+  login.test.js
+package.json
+README.md
+
+
+### Funcionalidades
+
+A função de login realiza as seguintes validações:
+- Verifica se o e-mail e a senha foram informados.
+- Verifica se o e-mail existe na lista de usuários.
+- Verifica se a credencial do usuário está expirada.
+- Verifica se a senha informada está correta.
+- Retorna mensagem de sucesso quando o login é realizado corretamente.
+
+### Cenários de teste
+
+Os testes automatizados cobrem os seguintes cenários:
+- Login realizado com sucesso.
+- Credencial expirada.
+- Usuário/e-mail não encontrado.
+- Senha incorreta para usuário existente.
+- E-mail não informado.
+- Senha não informada.
+
+
+### Como executar os testes
+
+Os testes são executados com o Mocha e o relatório é gerado com o Mochawesome.
+
+Execute o comando abaixo:
+npx mocha - Executa os testes e retorna resultado apenas no terminal sem gerar o report do Mochawesome
+npm test - Executa os testes com a geração do report do Mochawesome
+
+### Relatório de testes
+Após a execução dos testes, o Mochawesome gera um relatório na pasta:
+mochawesome-report/
+
+Essa pasta é gerada automaticamente e não precisa ser enviada para o repositório, já configurado no .gitignore

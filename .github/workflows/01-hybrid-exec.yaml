@@ -19,13 +19,13 @@ on:
     - cron: '0 0 * * 5' # -> Runs every friday at midnight
 
 
-# # Permissões necessárias para a extensão test-reporter gravar e ler o relatório dos testes executados
+# Permissões necessárias para a extensão test-reporter gravar e ler o relatório dos testes executados
 
-# permissions:
-#   # Permite a action ler o repositório e publicar checks com o relatório dos testes
-#   contents: read
-#   # Permite a action criar, atualizar e publicar o relatório de testes
-#   checks: write
+permissions:
+  # Permite a action ler o repositório e publicar checks com o relatório dos testes
+  contents: read
+  # Permite a action criar, atualizar e publicar o relatório de testes
+  checks: write
 
 # tarefas dentro da pipeline = jobs
 jobs:
@@ -50,4 +50,26 @@ jobs:
 
       # instalação da dependências
       - name: Rodando testes unitários
+        run: npm run test:junit
+
+      # publicação do sumário de testes na execução da pipeline
+      - name: Publicando sumário dos testes
+        uses: dorny/test-reporter@v2
+        if: always()
+        with:
+          name: Relatório de testes unitários
+          path: reports/junit/test-results.xml
+          reporter: java-junit
+
+      # geração do relatório HTML do Mochawesome
+      - name: Gerando relatório HTML dos testes
+        if: always()
         run: npm test
+
+      # publicação do relatório HTML como artefato da execução
+      - name: Publicando relatório HTML
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-mochawesome
+          path: mochawesome-report/

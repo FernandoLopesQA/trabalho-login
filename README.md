@@ -125,3 +125,25 @@ Após a execução dos testes, o Mochawesome gera um relatório na pasta:
 mochawesome-report/
 
 Essa pasta é gerada automaticamente e não precisa ser enviada para o repositório, já configurado no .gitignore
+
+## Pipeline de CI
+
+Foi criada uma pipeline no GitHub Actions com execução híbrida, configurada no arquivo `.github/workflows/01-hybrid-exec.yaml`.
+
+A pipeline possui os seguintes gatilhos:
+- Execução manual pelo `workflow_dispatch`.
+- Execução automática por `push` na branch `main`.
+- Execução agendada pelo `schedule`, toda sexta-feira à meia-noite.
+
+Durante a execução, a pipeline realiza as seguintes etapas:
+- Faz o checkout do repositório.
+- Configura o Node.js.
+- Instala as dependências com `npm ci`.
+- Executa os testes unitários com geração de relatório JUnit.
+- Publica o sumário dos testes na execução da pipeline com a action `dorny/test-reporter`.
+- Gera o relatório HTML com o Mochawesome.
+- Publica o relatório HTML como artefato com a action `actions/upload-artifact`.
+
+Os relatórios gerados na pipeline são:
+- Sumário dos testes exibido diretamente na execução do GitHub Actions.
+- Artefato `relatorio-mochawesome`, contendo o relatório HTML gerado pelo Mochawesome.

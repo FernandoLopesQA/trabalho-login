@@ -54,7 +54,7 @@ jobs:
 
       # publicação do sumário de testes na execução da pipeline
       - name: Publicando sumário dos testes
-        uses: dorny/test-reporter@v2
+        uses: dorny/test-reporter@v3
         if: always()
         with:
           name: Relatório de testes unitários
@@ -68,7 +68,7 @@ jobs:
 
       # publicação do relatório HTML como artefato da execução
       - name: Publicando relatório HTML
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
           name: relatorio-mochawesome

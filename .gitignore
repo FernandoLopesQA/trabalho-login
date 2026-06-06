@@ -6,3 +6,4 @@ node_modules/
 
 # Arquivos gerados pela execução do mochawesome report
 mochawesome-report/
+reports/

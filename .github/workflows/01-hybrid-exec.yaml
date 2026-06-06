@@ -1,0 +1,53 @@
+# CI de Nível Híbrido - Disparo Manual através de clique, disparo agendado através do schedule e execuçnao por push
+
+# nome da pipeline
+name: '01 - Pipeline com execução hibrida'
+
+# gatilho / triggers - regras de disparo
+
+on:
+  # gatilho manual = workflow_dispatch
+  workflow_dispatch:
+
+  # gatilho por events = push
+  push:
+    branches:
+      - main
+
+  # gatilho agendado = schedule
+  schedule:
+    - cron: '0 0 * * 5' # -> Runs every friday at midnight
+
+
+# # Permissões necessárias para a extensão test-reporter gravar e ler o relatório dos testes executados
+
+# permissions:
+#   # Permite a action ler o repositório e publicar checks com o relatório dos testes
+#   contents: read
+#   # Permite a action criar, atualizar e publicar o relatório de testes
+#   checks: write
+
+# tarefas dentro da pipeline = jobs
+jobs:
+  #nome do job - unidade
+  unidade:
+    # maquina onde o job vai rodar
+    runs-on: ubuntu-latest
+
+    # passos do job
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v5
+
+      # instalação do node
+      - uses: actions/setup-node@v5
+        with:
+          node-version: latest
+
+      # instalação da dependências
+      - name: Instalando dependências
+        run: npm ci
+
+      # instalação da dependências
+      - name: Rodando testes unitários
+        run: npm test
